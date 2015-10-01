@@ -1,0 +1,210 @@
+@import 'partials/_reset.scss';
+
+$color-light: #d7d7d7;
+$color-medium: #606060;
+$color-dark: #191919;
+$border-general: 1px solid #d7d7d7;
+$border-radius-general: 4px;
+$card-shadow: 0 1px 2px rgba(0,0,0,.4);
+
+
+@mixin flex-center(){
+  display: -moz-box;      /* OLD: Firefox (buggy) */
+  display: -ms-flexbox;   /* MID: IE 10 */
+  display: -webkit-flex;  /* NEW, Chrome 21–28, Safari 6.1+ */
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+/*---- Genteral ----*/
+
+body{
+	color: $color-medium;
+}
+
+//header
+
+header {
+	height: 50px;
+  @include flex-center();
+  justify-content: space-between;
+		nav {
+			@include flex-center();
+			margin-right: 4px;
+			img {
+				height: 40px;
+				width: 52px;
+				display: inline-block;
+			}
+		}
+}
+
+#makeDeck img{
+	margin-right: 10px;
+  background: url("../image/iconSheet.png") no-repeat -22px -4px;
+  &:hover, &.active {
+  	  background: url("../image/iconSheet.png") no-repeat -22px -56px;
+  }
+}
+	
+#practice img{
+  background: url("../image/iconSheet.png") no-repeat -90px -4px;
+  &:hover, &.active {
+  	  background: url("../image/iconSheet.png") no-repeat -90px -56px;
+  }
+}
+
+#info img{
+	margin-right: 8px;
+  background: url("../image/iconSheet.png") no-repeat -148px -4px;
+  &:hover, &.active {
+  	  background: url("../image/iconSheet.png") no-repeat -148px -56px;
+  }
+}
+
+#deck {
+	margin-left: 4px;
+  @include flex-center();
+	 span {
+  	margin-left: 8px;
+    color: $color-light;
+  }
+}
+
+	input {
+		color: $color-dark;
+		border: $border-general;
+		border-radius: $border-radius-general;
+		display: block;
+		margin: 10px 0;
+		padding-left: 10px;
+    height: 40px;
+    width: 80%;
+    &::-webkit-input-placeholder {
+   		color: $color-medium;
+		}
+		&:focus {
+			outline: none !important;
+		  box-shadow: $card-shadow;
+		  border: 1px solid #d7d7d7;
+		}
+	}
+
+	textarea {
+		@extend input;
+		color: $color-medium;
+		width: 100%;
+		height: 200px;
+		margin: 0;
+		padding-top: 4px;
+		 &::-webkit-input-placeholder {
+		 	color: $color-light;
+		}
+	}
+
+	button {
+    width: 80px;
+    height: 32px;
+    background-color: $color-light;
+    color: white;
+    border-radius: 2px;
+    &:focus{
+    	outline: none !important;
+    }
+    &:active{
+    	background-color: $color-medium;
+    }
+	}
+
+/*--- Create layout ---*/
+
+#createCards{
+	margin: 30px auto;
+	width: 80%;
+	height: 240px;
+	border: $border-general;
+	border-radius: $border-radius-general;
+  box-shadow: $card-shadow;
+  @include flex-center();
+  flex-direction: column;
+  justify-content: center;
+}
+
+#deckCode
+{
+	margin: 30px auto;
+	width: 80%;
+	button{
+    float: right;
+    margin: 8px 0 0 8px;
+    line-height: 14px;
+	}
+}
+
+
+/*--- Practice Layout ---*/
+#practiceContainer {
+	@include flex-center();
+}
+
+.card {
+	@extend #createCards;
+	min-height: 400px;
+}
+
+.face {
+		@include flex-center();
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
+    h6 {
+    	align-self: flex-start;
+    	color: $color-light;
+    	margin: 10px 0 0 10px;
+    }
+    p {
+	    margin: 0 14px;
+    }
+    .flip {
+    	align-self: flex-end;
+    	img {
+    		height: 32px;
+		    margin: 0 10px 7px 0;
+    	}
+    }
+}
+
+#back{
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+	span {
+    width: 3px;
+    height: 16px;
+		background-color: $color-light;
+		display: block;
+	}
+	span:first-child {
+		transform: rotate(-45deg);
+		top: 10px;
+    left: 3px;
+		position: relative;
+	}
+	span:nth-child(2) {
+		transform: rotate(45deg);
+	}
+}
+
+#next {
+	@extend #back;
+	left: auto;
+	right: 16px;
+	span:first-child {
+		transform: rotate(45deg);
+	}
+	span:nth-child(2) {
+		transform: rotate(-45deg);
+	}
+}

@@ -1,0 +1,224 @@
+@charset "UTF-8";
+/*---------- CSS reset ------------*/
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: top;
+  text-decoration: none !important; }
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after, q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+/*---- Genteral ----*/
+body {
+  color: #606060; }
+
+header {
+  height: 50px;
+  display: -moz-box;
+  /* OLD: Firefox (buggy) */
+  display: -ms-flexbox;
+  /* MID: IE 10 */
+  display: -webkit-flex;
+  /* NEW, Chrome 21–28, Safari 6.1+ */
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  justify-content: space-between; }
+  header nav {
+    display: -moz-box;
+    /* OLD: Firefox (buggy) */
+    display: -ms-flexbox;
+    /* MID: IE 10 */
+    display: -webkit-flex;
+    /* NEW, Chrome 21–28, Safari 6.1+ */
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    margin-right: 4px; }
+    header nav img {
+      height: 40px;
+      width: 52px;
+      display: inline-block; }
+
+#makeDeck img {
+  margin-right: 10px;
+  background: url("../image/iconSheet.png") no-repeat -22px -4px; }
+  #makeDeck img:hover, #makeDeck img.active {
+    background: url("../image/iconSheet.png") no-repeat -22px -56px; }
+
+#practice img {
+  background: url("../image/iconSheet.png") no-repeat -90px -4px; }
+  #practice img:hover, #practice img.active {
+    background: url("../image/iconSheet.png") no-repeat -90px -56px; }
+
+#info img {
+  margin-right: 8px;
+  background: url("../image/iconSheet.png") no-repeat -148px -4px; }
+  #info img:hover, #info img.active {
+    background: url("../image/iconSheet.png") no-repeat -148px -56px; }
+
+#deck {
+  margin-left: 4px;
+  display: -moz-box;
+  /* OLD: Firefox (buggy) */
+  display: -ms-flexbox;
+  /* MID: IE 10 */
+  display: -webkit-flex;
+  /* NEW, Chrome 21–28, Safari 6.1+ */
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center; }
+  #deck span {
+    margin-left: 8px;
+    color: #d7d7d7; }
+
+input, textarea {
+  color: #191919;
+  border: 1px solid #d7d7d7;
+  border-radius: 4px;
+  display: block;
+  margin: 10px 0;
+  padding-left: 10px;
+  height: 40px;
+  width: 80%; }
+  input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+    color: #606060; }
+  input:focus, textarea:focus {
+    outline: none !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    border: 1px solid #d7d7d7; }
+
+textarea {
+  color: #606060;
+  width: 100%;
+  height: 200px;
+  margin: 0;
+  padding-top: 4px; }
+  textarea::-webkit-input-placeholder {
+    color: #d7d7d7; }
+
+button {
+  width: 80px;
+  height: 32px;
+  background-color: #d7d7d7;
+  color: white;
+  border-radius: 2px; }
+  button:focus {
+    outline: none !important; }
+  button:active {
+    background-color: #606060; }
+
+/*--- Create layout ---*/
+#createCards, .card {
+  margin: 30px auto;
+  width: 80%;
+  height: 240px;
+  border: 1px solid #d7d7d7;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  display: -moz-box;
+  /* OLD: Firefox (buggy) */
+  display: -ms-flexbox;
+  /* MID: IE 10 */
+  display: -webkit-flex;
+  /* NEW, Chrome 21–28, Safari 6.1+ */
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center; }
+
+#deckCode {
+  margin: 30px auto;
+  width: 80%; }
+  #deckCode button {
+    float: right;
+    margin: 8px 0 0 8px;
+    line-height: 14px; }
+
+/*--- Practice Layout ---*/
+#practiceContainer {
+  display: -moz-box;
+  /* OLD: Firefox (buggy) */
+  display: -ms-flexbox;
+  /* MID: IE 10 */
+  display: -webkit-flex;
+  /* NEW, Chrome 21–28, Safari 6.1+ */
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center; }
+
+.card {
+  min-height: 400px; }
+
+.face {
+  display: -moz-box;
+  /* OLD: Firefox (buggy) */
+  display: -ms-flexbox;
+  /* MID: IE 10 */
+  display: -webkit-flex;
+  /* NEW, Chrome 21–28, Safari 6.1+ */
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  justify-content: space-between; }
+  .face h6 {
+    align-self: flex-start;
+    color: #d7d7d7;
+    margin: 10px 0 0 10px; }
+  .face p {
+    margin: 0 14px; }
+  .face .flip {
+    align-self: flex-end; }
+    .face .flip img {
+      height: 32px;
+      margin: 0 10px 7px 0; }
+
+#back, #next {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center; }
+  #back span, #next span {
+    width: 3px;
+    height: 16px;
+    background-color: #d7d7d7;
+    display: block; }
+  #back span:first-child, #next span:first-child {
+    transform: rotate(-45deg);
+    top: 10px;
+    left: 3px;
+    position: relative; }
+  #back span:nth-child(2), #next span:nth-child(2) {
+    transform: rotate(45deg); }
+
+#next {
+  left: auto;
+  right: 16px; }
+  #next span:first-child {
+    transform: rotate(45deg); }
+  #next span:nth-child(2) {
+    transform: rotate(-45deg); }
+
+/*# sourceMappingURL=style.css.map */

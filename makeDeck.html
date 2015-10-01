@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<link rel="stylesheet" href="css/style.css"/>		
+
+		<title>Mem_Plz</title>
+
+	</head>
+	<body>
+		<header>
+			<div id='deck'>
+				<img src='image/deckSize.png' alt='deckSymbol'/>
+				<span id='current'>0</span><span>/</span><span id='size'>0</span>
+			</div>
+			<nav>
+				<a id='makeDeck' href='#'><img class='active' src='#' alt=''/></a>
+				<a id='practice' href='#'><img src='#' alt=''/></a>
+				<a id='info' href='#'><img src='#' alt=''/></a>
+			</nav>
+		</header>
+		<div id='container'>
+			<div class='content'>
+				<div id='createCards'>
+					<input name='side1' type='text' placeholder='Side1'/>
+					<input name='side2' type='text' placeholder='Side2'/>
+					<button> Create </button>
+				</div>
+				<div id='deckCode'>
+					<label name='deckCode'>Deck Code</label>
+					<textarea name='deckCode' placeholder='Paste code here...'></textarea>
+					<button name='generate'> Generate </button>
+				</div>
+			</div>
+		</div>
+
+		<script type='text/javascript' src="js/jquery-1.11.3.min.js"></script>
+		<script type='text/javascript' src='js/script.js'></script>
+	</body>
+
+</html>
