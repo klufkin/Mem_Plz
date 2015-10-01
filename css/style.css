@@ -167,10 +167,32 @@ button {
   -webkit-align-items: center;
   align-items: center; }
 
+.cardContainer {
+  position: relative;
+  z-index: 1;
+  perspective: 1000;
+  width: 80%; }
+
 .card {
-  min-height: 400px; }
+  display: block;
+  width: 100%;
+  min-height: 400px;
+  transform-style: preserve-3d;
+  transition: all .5s linear; }
+  .card.flip {
+    transform: rotateY(180deg); }
 
 .face {
+  backface-visibility: hidden;
+  height: 100%;
+  width: 100%;
+  position: absolute; }
+  .face.front {
+    transform: rotateY(360deg); }
+  .face.back {
+    transform: rotateY(180deg); }
+
+.face > div {
   display: -moz-box;
   /* OLD: Firefox (buggy) */
   display: -ms-flexbox;
@@ -184,15 +206,15 @@ button {
   width: 100%;
   height: 100%;
   justify-content: space-between; }
-  .face h6 {
+  .face > div h6 {
     align-self: flex-start;
     color: #d7d7d7;
     margin: 10px 0 0 10px; }
-  .face p {
+  .face > div p {
     margin: 0 14px; }
-  .face .flip {
+  .face > div .flip {
     align-self: flex-end; }
-    .face .flip img {
+    .face > div .flip img {
       height: 32px;
       margin: 0 10px 7px 0; }
 
@@ -200,6 +222,8 @@ button {
   display: flex;
   flex-grow: 1;
   justify-content: center; }
+  #back:hover span, #next:hover span {
+    background-color: #606060; }
   #back span, #next span {
     width: 3px;
     height: 16px;

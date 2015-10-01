@@ -132,9 +132,10 @@ var practice = {
 		this.load();
 	},
 	cacheDom: function(){
-		this.$card = $('.face');
-		this.$side = $('.face h6');
-		this.$content=$('.face p');
+		// this.$container = $('.cardContainer');
+		this.$card = $('.card');
+		this.$frontContent=$('.front p');
+		this.$backContent=$('.back p');
 		this.$back = $('#back');
 		this.$next = $('#next');
 	},
@@ -143,31 +144,23 @@ var practice = {
 		this.$next.on('click', this.next.bind(this));
 		this.$back.on('click', this.back.bind(this));
 	},
-	side: 'side1',
 	load: function(){
-			this.$content.text(cardDeck.deck[cardDeck.current][this.side]);
+			this.$frontContent.text(cardDeck.deck[cardDeck.current]['side1']);
+			this.$backContent.text(cardDeck.deck[cardDeck.current]['side2']);
 	},
 	flip: function(){
-		if(this.side == 'side1'){
-			this.side = 'side2';
-			this.$side.text('Side 2');
-		}
-		else {
-			this.side = 'side1';
-			this.$side.text('Side 1');
-		}
-		this.load();
+		this.$card.toggleClass('flip');
 	},
 	next: function(){
-		this.side = 'side1';
-		this.$side.text('Side 1');
+		this.$card.removeClass('flip');
+		// this.$card.clone().appendTo('.cardContainer');
+		// this.cacheDom();
 		cardDeck.next();
 		this.load();
 		header.deckStats();
 	},
 	back: function(){
-		this.side = 'side1';
-		this.$side.text('Side 1');
+		this.$card.removeClass('flip');
 		cardDeck.back();
 		this.load();
 		header.deckStats();

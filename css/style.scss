@@ -148,12 +148,39 @@ header {
 	@include flex-center();
 }
 
+.cardContainer {
+	position: relative;
+	z-index: 1;
+	perspective: 1000;
+	width: 80%;
+}
+
 .card {
 	@extend #createCards;
+	display: block;
+	width: 100%;
 	min-height: 400px;
+	transform-style: preserve-3d;
+  transition: all .5s linear;
+  &.flip {
+	  transform: rotateY(180deg);
+  }
 }
 
 .face {
+	  backface-visibility: hidden;
+	  height: 100%;
+	  width: 100%;
+	  position: absolute;
+	  &.front {
+    	transform: rotateY(360deg);
+    }
+    &.back {
+    	transform: rotateY(180deg);
+    }
+}
+
+.face > div {
 		@include flex-center();
     flex-direction: column;
     width: 100%;
@@ -180,6 +207,9 @@ header {
   display: flex;
   flex-grow: 1;
   justify-content: center;
+  &:hover span{
+			background-color: $color-medium;
+	}
 	span {
     width: 3px;
     height: 16px;
