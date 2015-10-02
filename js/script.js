@@ -15,11 +15,11 @@ var header = {
 		$(document).keydown($.proxy(function(e) {
 	    if(e.which == 39) { // right
 	        practice.next();
-	        console.log('right');
+	        // console.log('right');
 	    }
 	    else if(e.which == 37){ // left
 	    		practice.back();
-	    		console.log('left');
+	    		// console.log('left');
 	    }
 	  }, this));
 	},
@@ -132,7 +132,6 @@ var practice = {
 		this.load();
 	},
 	cacheDom: function(){
-		// this.$container = $('.cardContainer');
 		this.$card = $('.card');
 		this.$frontContent=$('.front p');
 		this.$backContent=$('.back p');
@@ -145,24 +144,32 @@ var practice = {
 		this.$back.on('click', this.back.bind(this));
 	},
 	load: function(){
+		if(cardDeck.deck.length){
 			this.$frontContent.text(cardDeck.deck[cardDeck.current]['side1']);
 			this.$backContent.text(cardDeck.deck[cardDeck.current]['side2']);
+		}
 	},
 	flip: function(){
 		this.$card.toggleClass('flip');
 	},
 	next: function(){
 		this.$card.removeClass('flip');
-		// this.$card.clone().appendTo('.cardContainer');
-		// this.cacheDom();
+		this.$next.addClass('active');
+		//gives css animation time to run
+		setTimeout($.proxy(function() {this.$next.removeClass('active');},this), 200);
+	
 		cardDeck.next();
-		this.load();
+		//times load so it looks like content changes on flip
+		setTimeout($.proxy(function() {this.load();},this), 150);
 		header.deckStats();
 	},
 	back: function(){
 		this.$card.removeClass('flip');
+		this.$back.addClass('active');
+		setTimeout($.proxy(function() {this.$back.removeClass('active');},this), 200);
+
 		cardDeck.back();
-		this.load();
+		setTimeout($.proxy(function() {this.load();},this), 150);
 		header.deckStats();
 	}
 }

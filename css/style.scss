@@ -161,7 +161,7 @@ header {
 	width: 100%;
 	min-height: 400px;
 	transform-style: preserve-3d;
-  transition: all .5s linear;
+  transition: all .2s linear;
   &.flip {
 	  transform: rotateY(180deg);
   }
@@ -207,6 +207,10 @@ header {
   display: flex;
   flex-grow: 1;
   justify-content: center;
+  padding: 40px 0;
+  div {
+  	display: inherit;
+  }
   &:hover span{
 			background-color: $color-medium;
 	}
@@ -225,6 +229,15 @@ header {
 	span:nth-child(2) {
 		transform: rotate(45deg);
 	}
+	&.active div {
+		-webkit-animation: back linear .2s;
+	  animation: back linear .2s;
+	  -webkit-animation-fill-mode: forwards;
+	  animation-fill-mode: forwards;
+	  span {
+	  	background-color: $color-medium;
+	  }
+	}
 }
 
 #next {
@@ -237,4 +250,28 @@ header {
 	span:nth-child(2) {
 		transform: rotate(-45deg);
 	}
+	&.active div {
+		-webkit-animation: next linear .2s;
+	  animation: next linear .2s;
+	  -webkit-animation-fill-mode: forwards;
+	  animation-fill-mode: forwards;
+	}
+}
+
+
+@mixin translate($x, $y){
+  -webkit-transform:translate($x,$y);
+  transform:translate($x,$y);
+}
+@keyframes next {
+  0% { @include translate(0px, 0px);}
+  50% { @include translate(8px, 0px);} 
+  /*---  2nd Half(down)  ---*/
+  100% { @include translate(0px, 0px);}
+}
+@keyframes back {
+  0% { @include translate(0px, 0px);}
+  50% { @include translate(-8px, 0px);} 
+  /*---  2nd Half(down)  ---*/
+  100% { @include translate(0px, 0px);}
 }

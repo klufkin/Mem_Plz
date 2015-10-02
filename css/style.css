@@ -178,7 +178,7 @@ button {
   width: 100%;
   min-height: 400px;
   transform-style: preserve-3d;
-  transition: all .5s linear; }
+  transition: all .2s linear; }
   .card.flip {
     transform: rotateY(180deg); }
 
@@ -221,7 +221,10 @@ button {
 #back, #next {
   display: flex;
   flex-grow: 1;
-  justify-content: center; }
+  justify-content: center;
+  padding: 40px 0; }
+  #back div, #next div {
+    display: inherit; }
   #back:hover span, #next:hover span {
     background-color: #606060; }
   #back span, #next span {
@@ -236,6 +239,13 @@ button {
     position: relative; }
   #back span:nth-child(2), #next span:nth-child(2) {
     transform: rotate(45deg); }
+  #back.active div, .active#next div {
+    -webkit-animation: back linear .2s;
+    animation: back linear .2s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards; }
+    #back.active div span, .active#next div span {
+      background-color: #606060; }
 
 #next {
   left: auto;
@@ -244,5 +254,33 @@ button {
     transform: rotate(45deg); }
   #next span:nth-child(2) {
     transform: rotate(-45deg); }
+  #next.active div {
+    -webkit-animation: next linear .2s;
+    animation: next linear .2s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards; }
+
+@keyframes next {
+  0% {
+    -webkit-transform: translate(0px, 0px);
+    transform: translate(0px, 0px); }
+  50% {
+    -webkit-transform: translate(8px, 0px);
+    transform: translate(8px, 0px); }
+  /*---  2nd Half(down)  ---*/
+  100% {
+    -webkit-transform: translate(0px, 0px);
+    transform: translate(0px, 0px); } }
+@keyframes back {
+  0% {
+    -webkit-transform: translate(0px, 0px);
+    transform: translate(0px, 0px); }
+  50% {
+    -webkit-transform: translate(-8px, 0px);
+    transform: translate(-8px, 0px); }
+  /*---  2nd Half(down)  ---*/
+  100% {
+    -webkit-transform: translate(0px, 0px);
+    transform: translate(0px, 0px); } }
 
 /*# sourceMappingURL=style.css.map */
