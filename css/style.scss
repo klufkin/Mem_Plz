@@ -275,3 +275,24 @@ header {
   /*---  2nd Half(down)  ---*/
   100% { @include translate(0px, 0px);}
 }
+
+/* ------------ Info --------------*/
+
+#infoContainer {
+	@include flex-center();
+	flex-direction: column;
+	-webkit-flex-direction: column;
+	margin: 20px 40px;
+	font-size: 20px;
+	font-family: "Source Sans Pro","Lucida Grande",Verdana,sans-serif;
+	img {
+		width: 300px;
+	}
+	p {
+		margin-top: 20px;
+		a {
+			color: $color-dark;
+			text-decoration: underline !important;
+		}
+	}
+}

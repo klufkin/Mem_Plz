@@ -282,5 +282,28 @@ button {
   100% {
     -webkit-transform: translate(0px, 0px);
     transform: translate(0px, 0px); } }
+/* ------------ Info --------------*/
+#infoContainer {
+  display: -moz-box;
+  /* OLD: Firefox (buggy) */
+  display: -ms-flexbox;
+  /* MID: IE 10 */
+  display: -webkit-flex;
+  /* NEW, Chrome 21–28, Safari 6.1+ */
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  flex-direction: column;
+  -webkit-flex-direction: column;
+  margin: 20px 40px;
+  font-size: 20px;
+  font-family: "Source Sans Pro","Lucida Grande",Verdana,sans-serif; }
+  #infoContainer img {
+    width: 300px; }
+  #infoContainer p {
+    margin-top: 20px; }
+    #infoContainer p a {
+      color: #191919;
+      text-decoration: underline !important; }
 
 /*# sourceMappingURL=style.css.map */

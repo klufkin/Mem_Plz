@@ -38,6 +38,10 @@ var header = {
 					$(selected).find('img').addClass('active');
 					practice.init();
 				}
+				else if(selected.id == 'info'){
+					$(selected).find('img').addClass('active');
+					practice.init();
+				}
 	},
 	deckStats: function() {
 		this.$current.text(cardDeck.current + 1);
@@ -47,9 +51,9 @@ var header = {
 header.init();
 
 var cardDeck = {
-  Card: function(side1, side2){
-		this.side1 = side1 || "";
-		this.side2 = side2 || "";
+  Card: function(front, back){
+		this.front = front || "";
+		this.back = back || "";
 	},
   deck: [],
 	current: 0,
@@ -58,7 +62,7 @@ var cardDeck = {
   },
   next: function(){
 		this.current++;
-		if(this.current == this.deck.length)
+		if(this.current >= this.deck.length)
 			this.current = 0;
 	},
 	back: function(){
@@ -72,15 +76,15 @@ var create = {
 	init: function(){
 		this.cacheDom();
 		this.bindEvents();
-    this.$side1.focus();
-    this.$side1.val('');
-		this.$side2.val('');
+    this.$front.focus();
+    this.$front.val('');
+		this.$back.val('');
 		this.$deckCode.val('');
 		this.generateCode();
 	},
   cacheDom: function() {
-  	this.$side1 = $('#createCards input[name=side1]');
-  	this.$side2 = $('#createCards input[name=side2]');
+  	this.$front = $('#createCards input[name=front]');
+  	this.$back = $('#createCards input[name=back]');
   	this.$createButton = $('#createCards button');
   	this.$deckCode = $('#deckCode textarea[name=deckCode]');
   	this.$generate = $('#deckCode button[name=generate]');
@@ -89,24 +93,24 @@ var create = {
   	this.$createButton.on('click', this.createCard.bind(this));
   	this.$generate.on('click', this.generateCards.bind(this));
 
-  	this.$side1.keypress($.proxy(function(e) {
+  	this.$front.keypress($.proxy(function(e) {
 	    if(e.which == 13) { // enter
-	        this.$side2.focus();
+	        this.$back.focus();
 	    }
 		}, this));
 
-		this.$side2.keypress($.proxy(function(e) {
+		this.$back.keypress($.proxy(function(e) {
 	    if(e.which == 13) { // enter
 	    	this.createCard();
-        this.$side1.focus();
+        this.$front.focus();
 	    }
 		}, this));
   },
 	createCard: function() {
-		if(this.$side1.val() != '' && this.$side2.val() != ''){
-			cardDeck.addCard(this.$side1.val(), this.$side2.val());
-			this.$side1.val('');
-			this.$side2.val('');
+		if(this.$front.val() != '' && this.$back.val() != ''){
+			cardDeck.addCard(this.$front.val(), this.$back.val());
+			this.$front.val('');
+			this.$back.val('');
 			this.generateCode();
 			header.deckStats();
 		}
@@ -145,8 +149,8 @@ var practice = {
 	},
 	load: function(){
 		if(cardDeck.deck.length){
-			this.$frontContent.text(cardDeck.deck[cardDeck.current]['side1']);
-			this.$backContent.text(cardDeck.deck[cardDeck.current]['side2']);
+			this.$frontContent.text(cardDeck.deck[cardDeck.current]['front']);
+			this.$backContent.text(cardDeck.deck[cardDeck.current]['back']);
 		}
 	},
 	flip: function(){
