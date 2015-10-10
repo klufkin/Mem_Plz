@@ -42,7 +42,8 @@ header {
   display: flex;
   -webkit-align-items: center;
   align-items: center;
-  justify-content: space-between; }
+  justify-content: space-between;
+  -webkit-justify-content: space-between; }
   header nav {
     display: -moz-box;
     /* OLD: Firefox (buggy) */
@@ -59,10 +60,10 @@ header {
       width: 52px;
       display: inline-block; }
 
-#makeDeck img {
+#Mem_Plz img {
   margin-right: 10px;
   background: url("../image/iconSheet.png") no-repeat -22px -4px; }
-  #makeDeck img:hover, #makeDeck img.active {
+  #Mem_Plz img:hover, #Mem_Plz img.active {
     background: url("../image/iconSheet.png") no-repeat -22px -56px; }
 
 #practice img {
@@ -145,7 +146,9 @@ button {
   -webkit-align-items: center;
   align-items: center;
   flex-direction: column;
-  justify-content: center; }
+  justify-content: center;
+  -webkit-flex-direction: column;
+  -webkit-justify-content: center; }
 
 #deckCode {
   margin: 30px auto;
@@ -171,6 +174,7 @@ button {
   position: relative;
   z-index: 1;
   perspective: 1000;
+  -webkit-perspective: 1000;
   width: 80%; }
 
 .card {
@@ -178,19 +182,25 @@ button {
   width: 100%;
   min-height: 400px;
   transform-style: preserve-3d;
-  transition: all .2s linear; }
+  transition: all .2s linear;
+  -webkit-transform-style: preserve-3d;
+  -webkit-transition: all .2s linear; }
   .card.flip {
-    transform: rotateY(180deg); }
+    transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg); }
 
 .face {
   backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   height: 100%;
   width: 100%;
   position: absolute; }
   .face.front {
-    transform: rotateY(360deg); }
+    transform: rotateY(360deg);
+    -webkit-transform: rotateY(360deg); }
   .face.back {
-    transform: rotateY(180deg); }
+    transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg); }
 
 .face > div {
   display: -moz-box;
@@ -203,9 +213,11 @@ button {
   -webkit-align-items: center;
   align-items: center;
   flex-direction: column;
+  -webkit-flex-direction: column;
   width: 100%;
   height: 100%;
-  justify-content: space-between; }
+  justify-content: space-between;
+  -webkit-justify-content: space-between; }
   .face > div h6 {
     align-self: flex-start;
     color: #d7d7d7;
@@ -213,7 +225,8 @@ button {
   .face > div p {
     margin: 0 14px; }
   .face > div .flip {
-    align-self: flex-end; }
+    align-self: flex-end;
+    -webkit-align-self: flex-end; }
     .face > div .flip img {
       height: 32px;
       margin: 0 10px 7px 0; }
@@ -222,6 +235,9 @@ button {
   display: flex;
   flex-grow: 1;
   justify-content: center;
+  -webkit-display: flex;
+  -webkit-flex-grow: 1;
+  -webkit-justify-content: center;
   padding: 40px 0; }
   #back div, #next div {
     display: inherit; }
@@ -234,11 +250,13 @@ button {
     display: block; }
   #back span:first-child, #next span:first-child {
     transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
     top: 10px;
     left: 3px;
     position: relative; }
   #back span:nth-child(2), #next span:nth-child(2) {
-    transform: rotate(45deg); }
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg); }
   #back.active div, .active#next div {
     -webkit-animation: back linear .2s;
     animation: back linear .2s;
@@ -251,9 +269,11 @@ button {
   left: auto;
   right: 16px; }
   #next span:first-child {
-    transform: rotate(45deg); }
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg); }
   #next span:nth-child(2) {
-    transform: rotate(-45deg); }
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg); }
   #next.active div {
     -webkit-animation: next linear .2s;
     animation: next linear .2s;
@@ -301,7 +321,8 @@ button {
   #infoContainer img {
     width: 300px; }
   #infoContainer p {
-    margin-top: 20px; }
+    margin-top: 20px;
+    max-width: 400px; }
     #infoContainer p a {
       color: #191919;
       text-decoration: underline !important; }

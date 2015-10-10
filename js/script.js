@@ -30,7 +30,7 @@ var header = {
 	},
 	navSelect: function(selected){
 				this.$links.find('img').removeClass('active');
-				if(selected.id == 'makeDeck') {
+				if(selected.id == 'Mem_Plz') {
 					$(selected).find('img').addClass('active');
 					create.init();
 				}
