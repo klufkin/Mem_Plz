@@ -21,6 +21,9 @@ var header = {
 	    		practice.back();
 	    		// console.log('left');
 	    }
+	    else if (e.which == 32){
+	    		practice.flip();
+	    }
 	  }, this));
 	},
 	load: function(){
@@ -44,6 +47,7 @@ var header = {
 				}
 	},
 	deckStats: function() {
+	if(cardDeck.deck.length)
 		this.$current.text(cardDeck.current + 1);
   	this.$deckSize.text(cardDeck.deck.length);
   },
@@ -66,6 +70,7 @@ var cardDeck = {
 			this.current = 0;
 	},
 	back: function(){
+	if(this.current != 0)	
 		this.current--;
 		if(this.current < 0)
 			this.current = this.deck.length - 1;
