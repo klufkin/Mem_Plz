@@ -32,17 +32,17 @@ var header = {
 		}, this));
 	},
 	navSelect: function(selected){
-				this.$links.find('img').removeClass('active');
+				this.$links.find('div').removeClass('active');
 				if(selected.id == 'Mem_Plz') {
-					$(selected).find('img').addClass('active');
+					$(selected).find('div').addClass('active');
 					create.init();
 				}
 				else if(selected.id == 'practice'){
-					$(selected).find('img').addClass('active');
+					$(selected).find('div').addClass('active');
 					practice.init();
 				}
 				else if(selected.id == 'info'){
-					$(selected).find('img').addClass('active');
+					$(selected).find('div').addClass('active');
 					practice.init();
 				}
 	},
@@ -70,10 +70,12 @@ var cardDeck = {
 			this.current = 0;
 	},
 	back: function(){
-	if(this.current != 0)	
-		this.current--;
-		if(this.current < 0)
+		if(this.deck.length == 0){}
+		else if(this.current <= 0){
 			this.current = this.deck.length - 1;
+		}
+		else
+		  this.current--;
 	}
 }
 

@@ -55,26 +55,26 @@ header {
     -webkit-align-items: center;
     align-items: center;
     margin-right: 4px; }
-    header nav img {
+    header nav div {
       height: 40px;
       width: 52px;
       display: inline-block; }
 
-#Mem_Plz img {
+#Mem_Plz div {
   margin-right: 10px;
   background: url("../image/iconSheet.png") no-repeat -22px -4px; }
-  #Mem_Plz img:hover, #Mem_Plz img.active {
+  #Mem_Plz div:hover, #Mem_Plz div.active {
     background: url("../image/iconSheet.png") no-repeat -22px -56px; }
 
-#practice img {
+#practice div {
   background: url("../image/iconSheet.png") no-repeat -90px -4px; }
-  #practice img:hover, #practice img.active {
+  #practice div:hover, #practice div.active {
     background: url("../image/iconSheet.png") no-repeat -90px -56px; }
 
-#info img {
+#info div {
   margin-right: 8px;
   background: url("../image/iconSheet.png") no-repeat -148px -4px; }
-  #info img:hover, #info img.active {
+  #info div:hover, #info div.active {
     background: url("../image/iconSheet.png") no-repeat -148px -56px; }
 
 #deck {

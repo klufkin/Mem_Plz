@@ -33,7 +33,7 @@ header {
 		nav {
 			@include flex-center();
 			margin-right: 4px;
-			img {
+			div {
 				height: 40px;
 				width: 52px;
 				display: inline-block;
@@ -41,7 +41,7 @@ header {
 		}
 }
 
-#Mem_Plz img{
+#Mem_Plz div{
 	margin-right: 10px;
   background: url("../image/iconSheet.png") no-repeat -22px -4px;
   &:hover, &.active {
@@ -49,14 +49,14 @@ header {
   }
 }
 	
-#practice img{
+#practice div{
   background: url("../image/iconSheet.png") no-repeat -90px -4px;
   &:hover, &.active {
   	  background: url("../image/iconSheet.png") no-repeat -90px -56px;
   }
 }
 
-#info img{
+#info div{
 	margin-right: 8px;
   background: url("../image/iconSheet.png") no-repeat -148px -4px;
   &:hover, &.active {
