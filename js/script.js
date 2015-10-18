@@ -1,38 +1,34 @@
-var header = {
-	init: function() {
-		this.cacheDom();
-		this.bindEvents();
-	},
-	cacheDom: function(){
-		this.$links = $('header nav a');
-		this.$current = $('#current');
-  	this.$deckSize = $('#size');
-	},
-	bindEvents: function() {
-		this.$links.on('click', this.load);
+var header = (function() {
+	//cacheDom:
+		$links = $('header nav a');
+		$current = $('#current');
+  	$deckSize = $('#size');
 
+	//bindEvents: 
+		$links.on('click', function(e){
+			_load(this);
+		});
 		//for navigating cards
-		$(document).keydown($.proxy(function(e) {
+		$(document).keydown(function(e) {
 	    if(e.which == 39) { // right
 	        practice.next();
-	        // console.log('right');
 	    }
 	    else if(e.which == 37){ // left
 	    		practice.back();
-	    		// console.log('left');
 	    }
 	    else if (e.which == 32){
 	    		practice.flip();
 	    }
-	  }, this));
-	},
-	load: function(){
-		$('#container').load(this.id + '.html .content', $.proxy(function(){
-				header.navSelect(this);
-		}, this));
-	},
-	navSelect: function(selected){
-				this.$links.find('div').removeClass('active');
+	  });
+
+	function _load(link){
+		$('#container').load(link.id + '.html .content', function(){
+				_navSelect(link);
+		});
+	}
+
+	function _navSelect(selected) {
+				$links.find('div').removeClass('active');
 				if(selected.id == 'Mem_Plz') {
 					$(selected).find('div').addClass('active');
 					create.init();
@@ -45,14 +41,20 @@ var header = {
 					$(selected).find('div').addClass('active');
 					practice.init();
 				}
-	},
-	deckStats: function() {
-	if(cardDeck.deck.length)
-		this.$current.text(cardDeck.current + 1);
-  	this.$deckSize.text(cardDeck.deck.length);
-  },
-};
-header.init();
+	}
+
+	function deckStats() {
+		if(cardDeck.deck.length)
+			$current.text(cardDeck.current + 1);
+	  	$deckSize.text(cardDeck.deck.length);
+  }
+
+  return {
+  	deckStats: deckStats
+  };
+
+})();
+
 
 var cardDeck = {
   Card: function(front, back){
@@ -79,108 +81,131 @@ var cardDeck = {
 	}
 }
 
-var create = {
-	init: function(){
-		this.cacheDom();
-		this.bindEvents();
-    this.$front.focus();
-    this.$front.val('');
-		this.$back.val('');
-		this.$deckCode.val('');
-		this.generateCode();
-	},
-  cacheDom: function() {
-  	this.$front = $('#createCards input[name=front]');
-  	this.$back = $('#createCards input[name=back]');
-  	this.$createButton = $('#createCards button');
-  	this.$deckCode = $('#deckCode textarea[name=deckCode]');
-  	this.$generate = $('#deckCode button[name=generate]');
-  },
-  bindEvents: function() {
-  	this.$createButton.on('click', this.createCard.bind(this));
-  	this.$generate.on('click', this.generateCards.bind(this));
+var create = (function(){
+	function init(){
+		_cacheDom();
+		_bindEvents();
+    $front.focus();
+    $front.val('');
+		$back.val('');
+		$deckCode.val('');
+		_generateCode();
+	}
 
-  	this.$front.keypress($.proxy(function(e) {
-	    if(e.which == 13) { // enter
-	        this.$back.focus();
-	    }
-		}, this));
+  function _cacheDom() {
+  	$front = $('#createCards input[name=front]');
+  	$back = $('#createCards input[name=back]');
+  	$createButton = $('#createCards button');
+  	$deckCode = $('#deckCode textarea[name=deckCode]');
+  	$generate = $('#deckCode button[name=generate]');
+  }
 
-		this.$back.keypress($.proxy(function(e) {
+  function _bindEvents() {
+  	$createButton.on('click', _createCard.bind(this));
+  	$generate.on('click', _generateCards.bind(this));
+
+  	$front.keypress(function(e){
 	    if(e.which == 13) { // enter
-	    	this.createCard();
-        this.$front.focus();
+	        $back.focus();
 	    }
-		}, this));
-  },
-	createCard: function() {
-		if(this.$front.val() != '' && this.$back.val() != ''){
-			cardDeck.addCard(this.$front.val(), this.$back.val());
-			this.$front.val('');
-			this.$back.val('');
-			this.generateCode();
+		});
+
+		$back.keypress(function(e) {
+	    if(e.which == 13) { // enter
+	    	_createCard();
+        $front.focus();
+	    }
+		});
+  }
+
+	function _createCard() {
+		if($front.val() != '' && $back.val() != ''){
+			cardDeck.addCard($front.val(), $back.val());
+			$front.val('');
+			$back.val('');
+			_generateCode();
 			header.deckStats();
 		}
-	},
-	generateCode: function(){
+	}
+
+	function _generateCode(){
 		// turn array into json text
 		if(cardDeck.deck.length)
-			this.$deckCode.val(JSON.stringify(cardDeck.deck));
-	},
-	generateCards: function(){
-		cardDeck.deck = JSON.parse(this.$deckCode.val());
+			$deckCode.val(JSON.stringify(cardDeck.deck));
+	}
+
+	function _generateCards(){
+		cardDeck.deck = JSON.parse($deckCode.val());
 		header.deckStats();
 	}
-}
+
+	return {
+		init: init
+	};
+})();
 
 create.init();
 
 
-var practice = {
-	init: function() {
-		this.cacheDom();
-		this.bindEvents();
-		this.load();
-	},
-	cacheDom: function(){
-		this.$card = $('.card');
-		this.$frontContent=$('.front p');
-		this.$backContent=$('.back p');
-		this.$back = $('#back');
-		this.$next = $('#next');
-	},
-	bindEvents: function(){
-		this.$card.on('click', this.flip.bind(this));
-		this.$next.on('click', this.next.bind(this));
-		this.$back.on('click', this.back.bind(this));
-	},
-	load: function(){
+var practice = (function(){
+	function init() {
+		_cacheDom();
+		_bindEvents();
+		_load();
+	}
+
+	function _cacheDom(){
+		$card = $('.card');
+		$frontContent=$('.front p');
+		$backContent=$('.back p');
+		$back = $('#back');
+		$next = $('#next');
+	}
+
+	function _bindEvents() {
+		$card.on('click', flip.bind(this));
+		$next.on('click', next.bind(this));
+		$back.on('click', back.bind(this));
+	}
+
+	function _load() {
 		if(cardDeck.deck.length){
-			this.$frontContent.text(cardDeck.deck[cardDeck.current]['front']);
-			this.$backContent.text(cardDeck.deck[cardDeck.current]['back']);
+			$frontContent.text(cardDeck.deck[cardDeck.current]['front']);
+			$backContent.text(cardDeck.deck[cardDeck.current]['back']);
 		}
-	},
-	flip: function(){
-		this.$card.toggleClass('flip');
-	},
-	next: function(){
-		this.$card.removeClass('flip');
-		this.$next.addClass('active');
+	}
+
+	function flip(){
+		if($card) // may be able to remove after
+			$card.toggleClass('flip');
+	}
+
+	function next(){
+		$card.removeClass('flip');
+		$next.addClass('active');
 		//gives css animation time to run
-		setTimeout($.proxy(function() {this.$next.removeClass('active');},this), 200);
+		setTimeout(function() {$next.removeClass('active');}, 200);
 	
 		cardDeck.next();
 		//times load so it looks like content changes on flip
-		setTimeout($.proxy(function() {this.load();},this), 150);
-		header.deckStats();
-	},
-	back: function(){
-		this.$card.removeClass('flip');
-		this.$back.addClass('active');
-		setTimeout($.proxy(function() {this.$back.removeClass('active');},this), 200);
-
-		cardDeck.back();
-		setTimeout($.proxy(function() {this.load();},this), 150);
+		setTimeout(function() {_load();}, 150);
 		header.deckStats();
 	}
-}
+
+	function back(){
+		$card.removeClass('flip');
+		$back.addClass('active');
+		setTimeout(function() {$back.removeClass('active');}, 200);
+
+		cardDeck.back();
+		setTimeout(function() {_load();}, 150);
+		header.deckStats();
+	}
+
+	return {
+		init: init,
+		next: next,
+		back: back,
+		flip: flip
+	}
+})();
